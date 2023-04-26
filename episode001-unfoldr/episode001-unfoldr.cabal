@@ -1,0 +1,13 @@
+cabal-version: 3.0
+name: episode001-unfoldr
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+library
+  default-language: GHC2021
+  build-depends: base
+  exposed-modules: Unfoldr
