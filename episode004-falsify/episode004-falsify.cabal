@@ -1,0 +1,31 @@
+cabal-version:      3.0
+name:               episode004-falsify
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+category:           Testing
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common lang
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+
+executable episode4
+  import:
+      lang
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      app
+  build-depends:
+    , falsify
+    , selective
+    , tasty
