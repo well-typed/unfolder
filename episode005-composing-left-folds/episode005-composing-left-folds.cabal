@@ -1,0 +1,28 @@
+cabal-version: 3.0
+name: episode005-composing-left-folds
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+common defaults
+  default-language: GHC2021
+  build-depends: base, foldl
+
+executable textStats
+  import: defaults
+  main-is: textStats.hs
+
+executable textStatsMultipleReads
+  import: defaults
+  main-is: textStatsMultipleReads.hs
+
+executable textStatsSingleFold
+  import: defaults
+  main-is: textStatsSingleFold.hs
+
+executable textStatsCompositionalFold
+  import: defaults
+  main-is: textStatsCompositionalFold.hs

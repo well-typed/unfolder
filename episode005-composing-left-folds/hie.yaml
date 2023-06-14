@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "./textStats.hs"
+      component: "exe:textStats"
+    - path: "./textStatsMultipleReads.hs"
+      component: "exe:textStatsMultipleRead"
+    - path: "./textStatsSingleFold.hs"
+      component: "exe:textStatsSingleFold"
+    - path: "./textStatsCompositionalFold.hs"
+      component: "exe:textStatsCompositionalFold"
