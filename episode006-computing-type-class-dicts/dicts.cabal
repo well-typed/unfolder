@@ -1,0 +1,25 @@
+cabal-version: 3.0
+name:          dicts
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+category:      Development
+build-type:    Simple
+
+common lang
+  ghc-options:
+      -Wall
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+
+executable dicts
+  import:
+      lang
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      app
