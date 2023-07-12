@@ -1,0 +1,13 @@
+cabal-version: 3.0
+name: episode007-learning-by-testing
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+library
+  default-language: GHC2021
+  build-depends: base, megaparsec, transformers
+  exposed-modules: LearningByTesting
