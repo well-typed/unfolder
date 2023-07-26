@@ -1,0 +1,35 @@
+cabal-version: 3.0
+name:          laws
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+category:      Education
+build-type:    Simple
+
+common lang
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+
+executable laws
+  import:
+      lang
+  main-is:
+      Laws.hs
+  hs-source-dirs:
+      src
+  build-depends:
+    , containers
+    , inspection-testing
+    , QuickCheck
+    , splitmix
+    , tasty
+    , tasty-expected-failure
+    , tasty-hunit
+    , tasty-quickcheck
