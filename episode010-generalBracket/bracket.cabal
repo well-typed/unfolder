@@ -1,0 +1,36 @@
+cabal-version:      3.0
+name:               bracket
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+copyright:          Well-Typed LLP
+category:           Development
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+  default-extensions:
+      LambdaCase
+
+executable bracket
+  import:
+      lang
+  main-is:
+      Main.hs
+  other-modules:
+      Bracket
+      MonadBracket1
+      MonadBracket2
+      MonadBracket3
+  hs-source-dirs:
+      app
+  build-depends:
+    , exceptions
+    , mtl
