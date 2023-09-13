@@ -1,0 +1,41 @@
+cabal-version:   3.0
+name:            icfp2023
+version:         0.1.0
+license:         BSD-3-Clause
+license-file:    LICENSE
+author:          Edsko de Vries
+maintainer:      edsko@well-typed.com
+category:        Development
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common lang
+  ghc-options:
+      -Wall
+      -Wunused-packages
+      -Wredundant-constraints
+  default-language:
+      GHC2021
+  build-depends:
+    , base
+
+executable demo1
+  import:
+      lang
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      demo1
+  build-depends:
+    , async
+    , HasChor
+
+executable demo2
+  import:
+      lang
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      demo2
+  build-depends:
+      breakpoint
