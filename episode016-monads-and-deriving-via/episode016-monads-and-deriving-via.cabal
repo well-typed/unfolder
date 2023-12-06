@@ -1,0 +1,17 @@
+cabal-version: 3.0
+name: episode016-monads-and-deriving-via
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+library
+  default-language: GHC2021
+  build-depends: base
+  exposed-modules:
+    -- ErrorOld -- does not work with current GHCs
+    ErrorNew
+    ErrorUniversalInstances
+    ErrorDerivingVia
