@@ -8,6 +8,7 @@ import Data.Coerce
 data Error a =
     Ok a
   | Fail String
+  deriving (Functor, Applicative, Monad) via FromClassicMonad Error
 
 class ClassicMonad m where
   return' :: a -> m a
