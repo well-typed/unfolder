@@ -20,9 +20,9 @@ import HOS.Exp
 
 lam :: (Exp -> Exp) -> Exp
 lam f =
-    let ph = Var 0 -- Placeholder
-        n  = maxBV (f ph)
-        n' = succ n
+    let ph  = Var 0 -- Placeholder
+        n   = maxBV (f ph)
+        !n' = succ n
     in Lam n' (f (Var n'))
 
 app :: Exp -> Exp -> Exp

@@ -7,6 +7,9 @@ module HOS.Exp (
   , maxBV
   ) where
 
+import Control.DeepSeq
+import GHC.Generics
+
 {-------------------------------------------------------------------------------
   Definition
 -------------------------------------------------------------------------------}
@@ -26,7 +29,7 @@ data Exp =
     -- variables in @e@.
   | Lam Name Exp
 
-  deriving (Show)
+  deriving (Show, Generic, NFData)
 
 {-------------------------------------------------------------------------------
   Functions
