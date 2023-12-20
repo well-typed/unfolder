@@ -1,9 +1,9 @@
 -- | The classic circular program
 --
 -- Due to Richard Bird <https://dl.acm.org/doi/10.1007/BF00264249>
--- "Using circular programs to eliminate multiple traversals of data".
+-- "Using circular programs to eliminate multiple traversals of data" from 1984.
 
- module RepMin (
+module RepMin (
      repMin
    , Tree(..)
    , example

@@ -3,15 +3,15 @@ name:               ep17
 version:            0.1.0
 license:            BSD-3-Clause
 license-file:       LICENSE
-author:             Edsko de Vries
-maintainer:         edsko@well-typed.com
+author:             Edsko de Vries <edsko@well-typed.com>, Andres Löh <andres@well-typed.com>
+maintainer:         unfolder@well-typed.com
 build-type:         Simple
 
 common lang
   ghc-options:
       -Wall
   build-depends:
-      base ^>=4.16.4.0
+      base >= 4.16.4.0 && < 4.20
   default-language:
       GHC2021
   default-extensions:
@@ -21,6 +21,7 @@ library
   import:
       lang
   exposed-modules:
+      BFL
       RepMin
       HOS.Circular
       HOS.Exp
