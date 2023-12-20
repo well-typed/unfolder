@@ -1,0 +1,47 @@
+cabal-version:      3.0
+name:               ep17
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries <edsko@well-typed.com>, Andres Löh <andres@well-typed.com>
+maintainer:         unfolder@well-typed.com
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+  build-depends:
+      base >= 4.16.4.0 && < 4.20
+  default-language:
+      GHC2021
+  default-extensions:
+      DeriveAnyClass
+
+library
+  import:
+      lang
+  exposed-modules:
+      BFL
+      RepMin
+      HOS.Circular
+      HOS.Exp
+      HOS.Speculative
+  hs-source-dirs:
+      src
+  build-depends:
+    , deepseq
+
+benchmark bench-hos
+  import:
+      lang
+  type:
+      exitcode-stdio-1.0
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      bench
+  build-depends:
+    , criterion
+    , deepseq
+    , ep17
+
