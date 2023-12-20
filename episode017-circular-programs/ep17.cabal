@@ -10,10 +10,6 @@ build-type:         Simple
 common lang
   ghc-options:
       -Wall
-      -- Optimizations have quite a dramatic impact on this example; to keep
-      -- the focus on the code as written, rather than the code as optimized
-      -- by ghc, we disable optimizations.
-      -O0
   build-depends:
       base ^>=4.16.4.0
   default-language:

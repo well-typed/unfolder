@@ -9,10 +9,10 @@ main :: IO ()
 main = defaultMain [
       bgroup "speculative" $
         [ bench (show sz) $ nf Speculative.large sz
-        | sz <- [100, 200 .. 1_000]
+        | sz <- [1000, 2000 .. 10_000]
         ]
     , bgroup "circular" $
         [ bench (show sz) $ nf Circular.large sz
-        | sz <- [100, 200 .. 1_000]
+        | sz <- [1000, 2000 .. 10_000]
         ]
     ]

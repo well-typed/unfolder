@@ -37,4 +37,4 @@ identity = lam (\x -> app (app (lam (\y -> y)) (lam (\z -> z))) x)
 -- | Construct term with @n@ nested lamdas
 large :: Word -> Exp
 large 0 = lam (\x -> x)
-large n = lam (\_ -> large (n - 1))
+large n = lam (\x -> App x (large (n - 1)))
