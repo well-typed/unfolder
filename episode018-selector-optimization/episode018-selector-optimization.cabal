@@ -1,0 +1,23 @@
+cabal-version:      3.0
+name:               episode018-selector-optimization
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+executable ep18
+  ghc-options:
+      -Wall
+  main-is:
+      Main.hs
+  other-modules:
+      DoInline
+      DontInline
+  build-depends:
+      base >= 4.16
+  hs-source-dirs:
+      app
+  default-language:
+      GHC2021
