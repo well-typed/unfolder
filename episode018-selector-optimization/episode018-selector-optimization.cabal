@@ -8,16 +8,8 @@ maintainer:         edsko@well-typed.com
 build-type:         Simple
 
 executable ep18
-  ghc-options:
-      -Wall
-  main-is:
-      Main.hs
-  other-modules:
-      DoInline
-      DontInline
-  build-depends:
-      base >= 4.16
-  hs-source-dirs:
-      app
-  default-language:
-      GHC2021
+  ghc-options:      -Wall
+  main-is:          Main.hs
+  build-depends:    base >= 4.16
+  hs-source-dirs:   app
+  default-language: GHC2021
