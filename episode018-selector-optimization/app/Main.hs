@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -ddump-simpl -ddump-to-file -dsuppress-all #-}
+
 module Main where
 
 import Prelude hiding (break, last, fst, snd)
