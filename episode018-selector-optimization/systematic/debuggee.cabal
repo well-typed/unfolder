@@ -1,0 +1,60 @@
+cabal-version:      3.0
+name:               debuggee
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+executable debuggee
+    main-is:          Main.hs
+    other-modules:    LastBeforeBreak
+    build-depends:    base, ghc-debug-stub, vty <6
+    build-tool-depends: ghc-debug-brick:ghc-debug-brick
+    hs-source-dirs:   debuggee src
+    default-language: GHC2021
+    ghc-options:      -Wall
+                      -threaded
+                      -finfo-table-map
+                      -fdistinct-constructor-tables
+
+    -- TODO: Make this configurable
+    cpp-options: -DTEST_TWO_PRINTS
+
+    if flag(bespoke_last)
+      cpp-options: -DBESPOKE_LAST
+    else
+      cpp-options: -DPRELUDE_LAST
+
+    if flag(bespoke_break)
+      cpp-options: -DBESPOKE_BREAK
+    else
+      cpp-options: -DPRELUDE_BREAK
+
+    if flag(elem_int)
+      cpp-options: -DELEM=Int
+    else
+      cpp-options: -DELEM=Integer
+
+    if flag(inline_sameElem)
+      cpp-options: -DSAME_ELEM_INLINE
+    else
+      cpp-options: -DSAME_ELEM_NOINLINE
+
+Flag bespoke_last
+  Default: True
+  Manual: True
+
+Flag bespoke_break
+  Default: True
+  Manual: True
+
+Flag elem_int
+  Default: True
+  Manual: True
+
+Flag inline_sameElem
+  Default: False
+  Manual: True
+

@@ -1,0 +1,5 @@
+dump/*
+exe/*
+results.md
+src/*.hi
+src/*.o
