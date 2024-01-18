@@ -1,5 +1,8 @@
-{-# OPTIONS_GHC -fno-full-laziness -fno-state-hack #-}
-{-# LANGUAGE CPP #-}
+{-# OPTIONS_GHC -fno-full-laziness -fno-state-hack -O0 #-}
+
+{-# LANGUAGE CPP           #-}
+{-# LANGUAGE MagicHash     #-}
+{-# LANGUAGE UnboxedTuples #-}
 
 {-
   CPP flags expected to be set:
@@ -18,9 +21,45 @@
 module LastBeforeBreak (main) where
 
 import Prelude hiding (last, break)
+import GHC.Exts
+import GHC.IO
+
+#if ENABLE_GHC_DEBUG
+import System.Mem
+#endif
 
 #if defined(PRELUDE_LAST) || defined(PRELUDE_BREAK)
 import Prelude qualified
+#endif
+
+{-------------------------------------------------------------------------------
+  Priminaries: raw IO (so that we really know which code is executed)
+-------------------------------------------------------------------------------}
+
+type RawIO a = State# RealWorld -> (# State# RealWorld, a #)
+
+{-------------------------------------------------------------------------------
+  Integration with ghc-debug
+
+  This is enabled by default in the cabal file (and then disabled for the
+  tests that don't use the cabal file).
+
+  TODO: Currently we only pause in the two-prints test.
+-------------------------------------------------------------------------------}
+
+#ifdef TEST_TWO_PRINTS
+
+pauseForGhcDebug :: RawIO ()
+#ifdef ENABLE_GHC_DEBUG
+pauseForGhcDebug = \w0 ->
+    case unIO performMajorGC w0 of { (# w1, () #) ->
+    case unIO getLine        w1 of { (# w2, _  #) ->
+    (# w2, () #)
+    }}
+#else
+pauseForGhcDebug = \w0 -> (# w0, () #)
+#endif
+
 #endif
 
 {-------------------------------------------------------------------------------
@@ -31,13 +70,16 @@ import Prelude qualified
   examples more easy to compare.
 -------------------------------------------------------------------------------}
 
-isZero :: ELEM -> Bool
-{-# NOINLINE isZero #-}
-isZero x = x == 0
+-- We break at 5, so that this works both with the long and the short example
+shouldBreak :: ELEM -> Bool
+{-# NOINLINE shouldBreak #-}
+shouldBreak x = x == 5
 
-constructList :: () -> IO [ELEM]
+-- May want to enable the shorter example when using ghc-debug
+constructList :: () -> RawIO [ELEM]
 {-# NOINLINE constructList #-}
-constructList () = return [-1_000_000 .. 1_000_000]
+constructList () = \w -> (# w, [-1_000_000 .. 1_000_000] #)
+-- constructList () = \w -> (# w, [0 .. 10] #)
 
 #if defined(TEST_PRINT_EQ) || defined(TEST_SEQ_EQ)
 sameElem :: ELEM -> ELEM -> Bool
@@ -76,7 +118,7 @@ last = Prelude.last
 #ifdef BESPOKE_BREAK
 break :: [ELEM] -> ([ELEM], [ELEM])
 break []     = ([], [])
-break (x:xs) = if isZero x then
+break (x:xs) = if shouldBreak x then
                  ([], xs)
                else
                  let result = break xs
@@ -87,42 +129,71 @@ break (x:xs) = if isZero x then
 
 #ifdef PRELUDE_BREAK
 break :: [ELEM] -> ([ELEM], [ELEM])
-break = Prelude.break isZero
+break = Prelude.break shouldBreak
 #endif
 
 {-------------------------------------------------------------------------------
   Main test
 -------------------------------------------------------------------------------}
 
-test :: () ->  IO ()
-{-# NOINLINE test #-}
-test () = do
-    inputList <- constructList ()
+testIO :: () ->  RawIO ()
+{-# NOINLINE testIO #-}
+testIO () = \w0 ->
+    case constructList () w0 of { (# w1, inputList #) ->
+
+    -- Problems:
+    --
+    -- - With -O1, the definition of @last_after@ gets modified to
+    --
+    --   > case result of (_, b) -> last b
+    --
+    --   which GHC then does not recognize as a selector thunk.
+    --
+    -- - With -O0,
+    --
+    --   > last (case result of (_, b) -> b)
+    --
+    --   is a thunk /which has not yet allocated the selector thunk/.
+    --   If ghc would not insist on changing our code (even with -O0), perhaps
+    --   we could write this as
+    --
+    --   > let after      = case result of (_, b) -> b
+    --   >     last_after = last after
+    --
+    --   but unfortunately the Very Simple Optimizer seems to make it very very
+    --   difficult to make this actually happen.
 
     let result      = break inputList
         last_before = last (case result of (a, _) -> a)
-        last_after  = last (case result of (_, b) -> b)
+        last_after  = last (case result of (_, b) -> b) in
 
 #ifdef TEST_PRINT_EQ
-    print (sameElem last_before last_after)
+    unIO (print (sameElem last_before last_after)) w1
 #endif
 
 #ifdef TEST_SEQ_EQ
-    last_before `seq` last_after `seq` print (sameElem last_before last_after)
+    last_before `seq`
+    last_after  `seq`
+    unIO (print (sameElem last_before last_after)) w1
 #endif
 
 #ifdef TEST_ONE_PRINT
-    print (last_before, last_after)
+    unIO (print (last_before, last_after)) w1
 #endif
 
 #ifdef TEST_TWO_PRINTS
-    print last_before
-    print last_after
+    case unIO (print last_before) w1 of { (# w2, () #) ->
+    case       pauseForGhcDebug   w2 of { (# w3, _  #) ->
+    case unIO (print last_after)  w3 of { (# w4, () #) ->
+    (#w4, () #)
+    }}}
 #endif
+
+    }
 
 {-------------------------------------------------------------------------------
   Application driver
 -------------------------------------------------------------------------------}
 
 main :: IO ()
-main = test ()
+main = IO $ testIO ()

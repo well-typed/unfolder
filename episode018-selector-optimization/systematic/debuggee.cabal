@@ -18,9 +18,18 @@ executable debuggee
                       -threaded
                       -finfo-table-map
                       -fdistinct-constructor-tables
+                      -ddump-simpl
+                      -ddump-stg-final
+                      -ddump-cmm
+                      -ddump-to-file
 
-    -- TODO: Make this configurable
-    cpp-options: -DTEST_TWO_PRINTS
+    cpp-options:
+        -- Specify test to run
+        -- TODO: Make this configurable
+        -DTEST_TWO_PRINTS
+
+        -- Enable instrumentation for ghc debug
+        -DENABLE_GHC_DEBUG
 
     if flag(bespoke_last)
       cpp-options: -DBESPOKE_LAST
