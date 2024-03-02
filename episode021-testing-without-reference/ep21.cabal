@@ -1,0 +1,50 @@
+cabal-version:      3.0
+name:               ep21
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+      -Wunused-packages
+  default-language:
+      GHC2021
+  default-extensions:
+      DerivingStrategies
+      DisambiguateRecordFields
+  build-depends:
+    , base >= 4.16
+
+library
+  import:
+      lang
+  exposed-modules:
+      Dijkstra
+      Graph
+  hs-source-dirs:
+      src
+  build-depends:
+    , containers
+
+test-suite test-ep21
+  import:
+      lang
+  type:
+      exitcode-stdio-1.0
+  hs-source-dirs:
+      test
+  main-is:
+      Main.hs
+  other-modules:
+      Util.QuickCheck
+  build-depends:
+    , containers
+    , ep21
+    , QuickCheck
+    , tasty
+    , tasty-quickcheck
