@@ -1,0 +1,4 @@
+packages: .
+
+package ep21
+  tests: True
