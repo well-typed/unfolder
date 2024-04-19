@@ -1,0 +1,17 @@
+cabal-version:   3.8
+name:            specialization
+version:         0.1.0
+
+executable specialization
+    default-language:
+        GHC2021
+    hs-source-dirs:
+        src
+    main-is:
+        Main.hs
+    other-modules:
+        Add
+        Multiply
+    build-depends:
+        base
+      , random

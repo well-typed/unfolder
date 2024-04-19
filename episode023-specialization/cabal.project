@@ -1,0 +1,12 @@
+packages:
+  specialization.cabal
+
+program-options
+  ghc-options:
+    -dsuppress-all
+    -dsuppress-uniques
+    -dno-typeable-binds
+    -ddump-to-file
+    -ddump-rules
+
+    -dumpdir=dumps
