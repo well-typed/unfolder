@@ -1,6 +1,11 @@
-cabal-version:   3.8
-name:            specialization
-version:         0.1.0
+cabal-version: 3.8
+name: specialization
+author: Finley McIlwaine <finley@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
 
 executable specialization
     default-language:
