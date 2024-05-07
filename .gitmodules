@@ -1,0 +1,8 @@
+[submodule "episode025-java-to-haskell/java/server"]
+	path = episode025-java-to-haskell/java/server
+	url = https://github.com/edsko/kvstore.git
+	branch = edsko/unfolder-episode
+[submodule "episode025-java-to-haskell/java/client"]
+	path = episode025-java-to-haskell/java/client
+	url = https://github.com/edsko/kvstore.git
+	branch = edsko/simple-example-client

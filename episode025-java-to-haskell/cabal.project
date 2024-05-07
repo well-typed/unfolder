@@ -1,0 +1,9 @@
+packages: .
+
+source-repository-package
+  type: git
+  location: https://github.com/well-typed/grapesy.git
+  tag: 48bb5e7097ba65c6bc07080d84013fbba3e4ba43
+
+package grapesy
+  flags: -snappy
