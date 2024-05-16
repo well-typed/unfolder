@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package io.grpc;
+option java_package = "io.grpc.examples.proto";
+option java_multiple_files = true;
+option java_outer_classname = "KeyValues";
+
+message CreateRequest {
+  bytes key = 1;
+  bytes value = 2;
+}
+
+message CreateResponse {
+}
+
+message RetrieveRequest {
+  bytes key = 1;
+}
+
+message RetrieveResponse {
+  bytes value = 1;
+}
+
+message UpdateRequest {
+  bytes key = 1;
+  bytes value = 2;
+}
+
+message UpdateResponse {
+}
+
+message DeleteRequest {
+  bytes key = 1;
+}
+
+message DeleteResponse {
+}
+
+service KeyValueService {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Retrieve(RetrieveRequest) returns (RetrieveResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}

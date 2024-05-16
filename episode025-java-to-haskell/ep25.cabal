@@ -1,0 +1,45 @@
+cabal-version:      3.0
+name:               ep25
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common lang
+  ghc-options:
+      -Wall
+      -Wredundant-constraints
+      -Wunused-packages
+      -Widentities
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+  default-extensions:
+      DataKinds
+      OverloadedLabels
+      TypeFamilies
+
+executable ep25
+  import:
+      lang
+  main-is:
+      Runner.hs
+  ghc-options:
+      -main-is Runner
+  other-modules:
+      Proto.Kvstore
+      RecordDot
+      Service
+  hs-source-dirs:
+    , app
+    , proto
+  build-depends:
+    , bytestring
+    , containers
+    , grapesy
+    , proto-lens-runtime
+    , record-hasfield
