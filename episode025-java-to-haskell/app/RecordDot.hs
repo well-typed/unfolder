@@ -2,8 +2,10 @@
 
 -- | Definitions required to make record dot syntax work
 --
--- We could conceivably do this better in @grapesy@ proper, but for the sake
--- of the Unfolder episode, these definitions suffice.
+-- This is supported in a more systematic manner in the main library as of
+-- <https://github.com/well-typed/grapesy/pull/148>, but in order to keep this
+-- repository match the actual episode, we have pinned the version of @grapesy@
+-- that was used there.
 module RecordDot (
     module RecordDot
   , module GHC.Records.Compat

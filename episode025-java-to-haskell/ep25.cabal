@@ -34,6 +34,7 @@ executable ep25
       Proto.Kvstore
       RecordDot
       Service
+      VarArgs
   hs-source-dirs:
     , app
     , proto
