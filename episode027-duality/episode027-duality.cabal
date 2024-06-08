@@ -1,0 +1,32 @@
+cabal-version:      3.0
+name:               episode027-duality
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+  build-depends:
+      base >= 4.16
+  default-language:
+      Haskell2010
+
+library
+  import:
+      lang
+  exposed-modules:
+      -- In the order that they are discussed in the episode
+      Compression
+    , ClientServer.FirstAttempt
+    , ClientServer.SendRecv
+    , ClientServer.PosNeg
+  hs-source-dirs:
+      src
+  build-depends:
+    , bytestring
+    , HUnit
+    , monad-loops
