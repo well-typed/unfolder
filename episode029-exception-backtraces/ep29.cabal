@@ -1,0 +1,35 @@
+cabal-version:      3.0
+name:               ep29
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+
+      -- We define some orphan instances for PrettyVal. This is not really
+      -- relevant to the episode at all.
+      -Wno-orphans
+  build-depends:
+      -- This episode is specifically about a feature introduced in ghc 9.10
+      base >= 4.20
+  default-language:
+      GHC2024
+  default-extensions:
+      DeriveAnyClass
+
+executable ep29
+  import:
+      lang
+  main-is:
+      Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+    , annotated-exception >= 0.3  && < 0.4
+    , pretty-show         >= 1.10 && < 1.11
+    , ghc-internal
