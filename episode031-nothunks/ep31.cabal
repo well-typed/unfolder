@@ -1,0 +1,49 @@
+cabal-version:      3.0
+name:               ep31
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+common lang
+  ghc-options:
+      -Wall
+      -Widentities
+      -Wprepositive-qualified-module
+      -Wredundant-constraints
+      -Wunused-packages
+  build-depends:
+      base >= 4.16
+  default-language:
+      GHC2021
+  default-extensions:
+      DataKinds
+      DeriveAnyClass
+      DerivingStrategies
+      DerivingVia
+      OverloadedStrings
+
+executable ep31
+  import:
+      lang
+  main-is:
+      Main.hs
+  other-modules:
+      StrictMVar
+      Version1
+      Version2
+      Remarks
+  hs-source-dirs:
+      app
+  build-depends:
+    , containers
+    , deepseq
+    , nothunks >= 0.3
+    , text
+    , time
+  ghc-options:
+      -finfo-table-map
+      -fdistinct-constructor-tables
+      -g3
