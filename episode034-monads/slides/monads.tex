@@ -1,0 +1,118 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{mathpazo, times}
+\usepackage{tikz}
+
+% https://tex.stackexchange.com/questions/353100/is-there-a-dotted-box-placeholder-symbol
+\def\placeholder{\tikz\node[draw=black,dashed,very thick] {\vphantom{.}};}
+
+\beamertemplatenavigationsymbolsempty
+
+\begin{document}
+
+\fontsize{22}{22}\selectfont
+
+\begin{frame}[t]
+\begin{equation*}
+\begin{array}{l@{\;=\;}l}
+\mathit{poly}(x) & 3x^2 + 4 \\ \pause
+ & (\placeholder + 4) \cdot (3 \times \placeholder) \cdot \placeholder^2
+\end{array}
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+(f \cdot g)(x) \pause = f(g(x))
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{equation*}
+(f \cdot g)(x) = f(g(x))
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+\begin{array}{l@{\;=\;}l}
+(f \cdot (g \cdot h)) (x) & \pause f((g \cdot h)(x)) \\
+& \pause f(g(h(x)) \\
+\end{array}
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+\begin{array}{l@{\;=\;}l}
+((f \cdot g) \cdot h)(x) & \pause (f \cdot g)(h(x)) \\
+& \pause f(g(h(x)) \\
+\end{array}
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+f \cdot (g \cdot h) = (f \cdot g) \cdot h = f \cdot g \cdot h
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+
+%\begin{equation*}
+%(f \cdot g)(x) = f(g(x))
+%\end{equation*}
+%
+%\pause
+
+\begin{equation*}
+\mathtt{id}(x) = x
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+\begin{array}{l@{\;=\;}l}
+(f \cdot \mathtt{id})(x) & \pause f(\mathtt{id}(x)) \\
+& \pause f(x)
+\end{array}
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+\begin{array}{l@{\;=\;}l}
+(\mathtt{id} \cdot f)(x) & \pause \mathtt{id}(f(x)) \\
+& \pause f(x)
+\end{array}
+\end{equation*}
+
+\pause
+
+\begin{equation*}
+f \cdot \mathtt{id} = \mathtt{id} \cdot f = f
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{equation*}
+(f \cdot g)(x) = f(g(x))
+\end{equation*}
+
+\vspace{1em}
+
+\begin{equation*}
+\begin{array}{l@{\;=\;}l@{\;=\;}l}
+f \cdot (g \cdot h) & (f \cdot g) \cdot h & f \cdot g \cdot h \\[1em]
+f \cdot \mathtt{id} & \mathtt{id} \cdot f & f
+\end{array}
+\end{equation*}
+
+\end{frame}
+
+\end{document}
