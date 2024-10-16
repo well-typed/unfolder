@@ -1,0 +1,29 @@
+cabal-version: 3.0
+name:          ep34
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  build-depends:    base >= 4.16
+  default-language: Haskell2010
+
+  ghc-options:
+      -Wall
+      -Wno-type-defaults
+
+  default-extensions:
+      DeriveAnyClass
+      DerivingStrategies
+      GeneralizedNewtypeDeriving
+      NumericUnderscores
+      ScopedTypeVariables
+
+library
+  import:          lang
+  hs-source-dirs:  src
+  build-depends:   mtl
+  exposed-modules: Ep34, Timed, Background
