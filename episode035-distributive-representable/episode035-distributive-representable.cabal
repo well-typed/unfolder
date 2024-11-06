@@ -1,0 +1,19 @@
+cabal-version: 3.0
+name: episode035-distributive-representable
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+library
+  default-language: GHC2021
+  ghc-options: -Wall
+  build-depends:
+    base,
+    adjunctions,
+    distributive
+  exposed-modules:
+    DistributiveRepresentable
+    Rendering
