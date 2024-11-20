@@ -1,0 +1,85 @@
+cabal-version:      3.0
+name:               ep36
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+extra-source-files: cbits/*.c
+                    cbits/*.h
+
+common lang
+  build-depends:    base >= 4.16
+  default-language: GHC2021
+
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+      -Wunused-packages
+
+  default-extensions:
+      CApiFFI
+      DerivingStrategies
+      InterruptibleFFI
+
+common exe
+  ghc-options:
+      -threaded
+      -rtsopts
+
+library
+  import:          lang
+  hs-source-dirs:  src
+
+  exposed-modules:
+      CBits.Interruptible
+      CBits.Safe
+      CBits.Unsafe
+      Native
+      Tests
+
+  build-depends:
+    , deepseq
+
+  -- C sources
+  include-dirs:    cbits
+  c-sources:       cbits/ep36.c
+  cc-options:      -Wall
+
+executable cpu
+  import:         lang, exe
+  main-is:        Test1_CPU.hs
+  ghc-options:    -main-is Test1_CPU
+  hs-source-dirs: app
+  build-depends:  ep36
+
+executable timeout
+  import:         lang, exe
+  main-is:        Test2_Timeout.hs
+  ghc-options:    -main-is Test2_Timeout
+  hs-source-dirs: app
+  build-depends:  ep36
+
+executable concurrent
+  import:         lang, exe
+  main-is:        Test3_Concurrent.hs
+  ghc-options:    -main-is Test3_Concurrent
+  hs-source-dirs: app
+  build-depends:  ep36
+
+executable stoptheworld
+  import:         lang, exe
+  main-is:        Test4_StopTheWorld.hs
+  ghc-options:    -main-is Test4_StopTheWorld
+  hs-source-dirs: app
+  build-depends:  ep36
+
+executable pinning
+  import:         lang, exe
+  main-is:        Test5_Pinning.hs
+  ghc-options:    -main-is Test5_Pinning
+                  -debug
+                  "-with-rtsopts=--disable-delayed-os-memory-return -DZ -Fd0"
+  hs-source-dirs: app
+  build-depends:  ep36, primitive
