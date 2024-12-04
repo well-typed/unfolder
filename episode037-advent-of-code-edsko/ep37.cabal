@@ -1,0 +1,20 @@
+cabal-version:      3.0
+name:               ep37
+version:            0.1.0
+synopsis:           Edsko's solution to Day 4 of Advent of Code 2024
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common lang
+  default-language: GHC2021
+  ghc-options:      -Wall
+  build-depends:    base >= 4.16
+
+executable ep37
+  import:         lang
+  main-is:        Main.hs
+  hs-source-dirs: app
