@@ -1,0 +1,9 @@
+includedir=${prefix}
+libdir=${prefix}
+
+Name: ep38-cuda
+Description: CUDA component of Episode 38 of the Haskell Unfolder
+Version: 0.1.0
+
+Cflags: -I${includedir}
+Libs: -L${libdir} -lep38-cuda
