@@ -17,12 +17,12 @@ main = defaultMain $ testGroup "Episode 38" [
           (Ep38.CUDA.mapAdd x inp)
     , testProperty "fold" $ \(SmallArray inp) ->
         testRoughlyEqual
-          (Vector.foldl' (+) 0 inp)
-          (Ep38.CUDA.foldAdd   inp)
+          (Vector.foldl1 (+) inp)
+          (Ep38.CUDA.foldAdd inp)
     , testProperty "scan" $ \(SmallArray inp) ->
         testRoughlyEqual
-          (Vector.postscanl (+) 0 inp)
-          (Ep38.CUDA.scanAdd      inp)
+          (Vector.scanl1 (+) inp)
+          (Ep38.CUDA.scanAdd inp)
     ]
 
 {-------------------------------------------------------------------------------
