@@ -1,0 +1,27 @@
+cabal-version:      3.0
+name:               ep38
+version:            0.1.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Edsko de Vries
+maintainer:         edsko@well-typed.com
+build-type:         Simple
+
+common lang
+  build-depends:    base >= 4.19 && < 5
+  default-language: GHC2021
+
+  default-extensions:
+      DataKinds
+      GADTs
+
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+
+executable ep38
+  import:         lang
+  main-is:        Main.hs
+  hs-source-dirs: app
+  other-modules:  Shorthand
+  build-depends:  template-haskell
