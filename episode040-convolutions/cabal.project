@@ -1,0 +1,4 @@
+packages: .
+
+package ep40
+  tests: true
