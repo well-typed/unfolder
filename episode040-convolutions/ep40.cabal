@@ -1,0 +1,58 @@
+cabal-version: 3.0
+name:          ep40
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  build-depends:    base >= 4.16
+  default-language: GHC2021
+
+  ghc-options:
+    -Wall
+    -Widentities
+    -Wno-unticked-promoted-constructors
+    -Wprepositive-qualified-module
+    -Wredundant-constraints
+
+  default-extensions:
+    CApiFFI
+    DataKinds
+    DerivingStrategies
+    LambdaCase
+    TypeFamilies
+
+library
+  import:          lang
+  hs-source-dirs:  src
+  exposed-modules: Ep40.Tensor
+
+  build-depends:
+    , fin
+    , testing-tensor
+    , vec
+
+test-suite test-ep40
+  import:         lang
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  other-modules:  CUDNN
+  hs-source-dirs: test
+  build-depends:  ep40
+  ghc-options:    -Wno-orphans
+
+  build-depends:
+    , fin
+    , mtl
+    , tasty
+    , tasty-quickcheck
+    , testing-tensor
+    , vec
+
+  -- C options
+  include-dirs:    test-cbits
+  c-sources:       test-cbits/test-cudnn.c
+  extra-libraries: cudart cudnn
