@@ -1,0 +1,39 @@
+cabal-version: 3.0
+name:          ep42
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  -- ghc 9.6 or higher
+  build-depends:    base >= 4.18 && < 5
+  default-language: GHC2021
+  ghc-options:      -Wall
+
+  default-extensions:
+      DerivingStrategies
+      OverloadedStrings
+      TypeFamilies
+
+library
+  import:           lang
+  hs-source-dirs:   src
+  other-extensions: TemplateHaskell
+
+  build-depends:
+    , containers  >= 0.6 && < 0.7
+    , lens        >= 5.3 && < 5.4
+    , text        >= 2.0 && < 2.2
+    , typedKanren >= 0.1 && < 0.2
+
+  exposed-modules:
+    Basics
+    Typechecker.Hybrid
+    Typechecker.Language
+    Typechecker.Relational
+
+    Kanren.Instances
+

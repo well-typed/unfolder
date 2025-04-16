@@ -1,0 +1,7 @@
+packages: .
+
+source-repository-package
+  type: git
+  location: https://github.com/snejugal/typedKanren.git
+  tag: d6d998c80624f6b71d853565e650fecf76be0203
+
