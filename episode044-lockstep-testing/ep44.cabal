@@ -1,0 +1,42 @@
+cabal-version: 3.0
+name:          ep44
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  default-language: GHC2021
+  build-depends:    base >=4.16 && < 5
+
+  ghc-options:
+      -Wall
+      -Wredundant-constraints
+      -Widentities
+      -Wunused-packages
+
+  default-extensions:
+      DerivingStrategies
+      TypeFamilies
+
+executable ep44
+  import:           lang
+  main-is:          Main.hs
+  hs-source-dirs:   test
+  build-depends:    eurekaprom-io
+
+  other-modules:
+      Test.Model
+      Test.SUT
+
+  build-depends:
+      -- external dependencies
+    , ansi-terminal       >= 1.1  && < 1.2
+    , containers          >= 0.6  && < 0.7
+    , mtl                 >= 2.2  && < 2.4
+    , quickcheck-dynamic  >= 3.4  && < 3.5
+    , quickcheck-lockstep >= 0.6  && < 0.7
+    , tasty               >= 1.5  && < 1.6
+    , tasty-quickcheck    >= 0.11 && < 0.12
