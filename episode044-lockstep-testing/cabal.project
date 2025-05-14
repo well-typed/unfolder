@@ -1,0 +1,7 @@
+packages: .
+
+source-repository-package
+  type: git
+  location: https://github.com/edsko/eurekaprom-io.git
+  tag: 4e050930a61f7c1f9512d3468f167750035be275 
+  subdir: haskell
