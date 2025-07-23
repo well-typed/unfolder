@@ -1,0 +1,51 @@
+cabal-version: 3.0
+name:          ep47
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  build-depends:    base >= 4.17 && < 5
+  default-language: GHC2021
+
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+      -Wunused-packages
+
+  default-extensions:
+      DeriveAnyClass
+      DerivingStrategies
+      NoFieldSelectors
+      OverloadedRecordDot
+
+executable ep47
+  import:         lang
+  main-is:        Main.hs
+  hs-source-dirs: app
+
+  ghc-options:
+      -threaded
+      -with-rtsopts=-N
+
+  other-modules:
+      Cmdline
+      Gnuplot
+      Line
+      LinearRegression
+      Points
+      Timing
+
+  build-depends:
+    , async
+    , bytestring
+    , optparse-applicative
+    , parallel
+    , random
+    , store
+    , store-core
+    , time
+    , vector
