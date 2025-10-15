@@ -1,0 +1,32 @@
+cabal-version: 3.0
+name:          ep49
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  default-language: GHC2021
+  build-depends:    base >=4.17 && < 5
+
+  default-extensions:
+      DerivingStrategies
+      ImportQualifiedPost
+
+  ghc-options:
+      -Wall
+      -Wredundant-constraints
+      -Widentities
+      -Wprepositive-qualified-module
+
+executable ep49
+  import:         lang
+  main-is:        Main.hs
+  hs-source-dirs: app
+  other-modules:  KeyValueStore
+
+  build-depends:
+    , containers
+    , QuickCheck
