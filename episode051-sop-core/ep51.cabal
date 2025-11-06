@@ -1,0 +1,40 @@
+cabal-version: 3.0
+name:          ep51
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  default-language: GHC2021
+  build-depends:    base >= 4.17 && < 5
+
+  ghc-options:
+      -Wall
+      -Wredundant-constraints
+      -Wprepositive-qualified-module
+
+  default-extensions:
+      DataKinds
+      GADTs
+      OverloadedRecordDot
+
+executable ep51
+  import:         lang
+  main-is:        Main.hs
+  hs-source-dirs: app
+
+  other-modules:
+      Untyped
+      Util.Aeson
+      Util.Transport
+
+  build-depends:
+    , aeson
+    , async
+    , bytestring >= 0.11.2 && < 0.13
+    , sop-core
+    , time
+    , vector
