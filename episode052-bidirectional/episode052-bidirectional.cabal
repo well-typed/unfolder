@@ -1,0 +1,27 @@
+cabal-version: 3.0
+name: episode052-bidirectional
+author: Andres Löh <andres@well-typed.com>
+maintainer: unfolder@well-typed.com
+version: 1
+build-type: Simple
+license: BSD-3-Clause
+license-file: LICENSE
+
+library
+  default-language: GHC2021
+  hs-source-dirs: src
+  ghc-options: -Wall
+  build-depends:
+    base,
+    aeson,
+    autodocodec,
+    autodocodec-exact,
+    autodocodec-openapi3,
+    autodocodec-schema,
+    containers,
+    text
+  exposed-modules:
+    Bidirectional
+    BidirectionalAuto
+    BidirectionalTemplate
+    BidirectionalAutoTemplate
