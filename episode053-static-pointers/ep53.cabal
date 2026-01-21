@@ -1,0 +1,83 @@
+cabal-version: 3.0
+name:          ep53
+version:       0.1.0
+license:       BSD-3-Clause
+license-file:  LICENSE
+author:        Edsko de Vries
+maintainer:    edsko@well-typed.com
+build-type:    Simple
+
+common lang
+  build-depends:    base >= 4.18 && < 5
+  default-language: GHC2021
+
+  ghc-options:
+      -Wall
+      -Wprepositive-qualified-module
+      -Wredundant-constraints
+      -Wunused-packages
+
+  default-extensions:
+      DeriveAnyClass
+      DerivingStrategies
+      DerivingVia
+      DuplicateRecordFields
+      LambdaCase
+      OverloadedRecordDot
+      OverloadedStrings
+      StaticPointers
+      UndecidableInstances
+
+library
+  import:        lang
+  hs-source-dirs: src
+
+  exposed-modules:
+      Util.Aeson
+      Util.Base64
+
+      Static.Closure
+      Static.Ptr
+      Static.Ptr.Simple
+
+  build-depends:
+    , aeson
+    , base64
+    , bytestring
+    , constraints
+    , directory
+    , text
+
+executable NoStaticPtr
+  import:         lang
+  main-is:        NoStaticPtr.hs
+  ghc-options:    -main-is NoStaticPtr
+  hs-source-dirs: app
+  build-depends:  ep53
+
+executable UseSimpleStaticPtr
+  import:         lang
+  main-is:        UseSimpleStaticPtr.hs
+  ghc-options:    -main-is UseSimpleStaticPtr
+  hs-source-dirs: app
+  build-depends:  ep53
+
+executable UseStaticPtr
+  import:         lang
+  main-is:        UseStaticPtr.hs
+  ghc-options:    -main-is UseStaticPtr
+  hs-source-dirs: app
+  build-depends:  ep53
+
+executable UseClosure
+  import:         lang
+  main-is:        UseClosure.hs
+  ghc-options:    -main-is UseClosure
+  hs-source-dirs: app
+  build-depends:  ep53, time
+
+executable NewRules
+  import:         lang
+  main-is:        NewRules.hs
+  ghc-options:    -main-is NewRules
+  hs-source-dirs: app
